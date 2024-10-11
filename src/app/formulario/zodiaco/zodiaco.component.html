@@ -1,0 +1,60 @@
+<div class="zodiac-container">
+    <h2>Calcula tu Signo del Zodiaco Chino</h2>
+  
+    <form [formGroup]="zodiacForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" formControlName="nombre" class="form-control" placeholder="Ingresa tu nombre" />
+        <div *ngIf="zodiacForm.get('nombre')?.invalid && zodiacForm.get('nombre')?.touched" class="error">
+          El nombre es requerido.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="apellidoPaterno">Apellido Paterno:</label>
+        <input type="text" id="apellidoPaterno" formControlName="apellidoPaterno" class="form-control" placeholder="Ingresa tu apellido paterno" />
+        <div *ngIf="zodiacForm.get('apellidoPaterno')?.invalid && zodiacForm.get('apellidoPaterno')?.touched" class="error">
+          El apellido paterno es requerido.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="apellidoMaterno">Apellido Materno:</label>
+        <input type="text" id="apellidoMaterno" formControlName="apellidoMaterno" class="form-control" placeholder="Ingresa tu apellido materno" />
+        <div *ngIf="zodiacForm.get('apellidoMaterno')?.invalid && zodiacForm.get('apellidoMaterno')?.touched" class="error">
+          El apellido materno es requerido.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="dia">Día de Nacimiento:</label>
+        <input type="number" id="dia" formControlName="dia" class="form-control" placeholder="Ingresa el día" />
+        <div *ngIf="zodiacForm.get('dia')?.invalid && zodiacForm.get('dia')?.touched" class="error">
+          El día es requerido.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="mes">Mes de Nacimiento:</label>
+        <input type="number" id="mes" formControlName="mes" class="form-control" placeholder="Ingresa el mes" />
+        <div *ngIf="zodiacForm.get('mes')?.invalid && zodiacForm.get('mes')?.touched" class="error">
+          El mes es requerido.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="ano">Año de Nacimiento:</label>
+        <input type="number" id="ano" formControlName="ano" class="form-control" placeholder="Ingresa el año" />
+        <div *ngIf="zodiacForm.get('ano')?.invalid && zodiacForm.get('ano')?.touched" class="error">
+          El año debe estar entre 1900 y el año actual.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="!zodiacForm.valid">Calcular Signo Chino</button>
+    </form>
+  
+    <div *ngIf="zodiacSign" class="result">
+        <h3>{{Nombre}}</h3>
+      <h3> Tu signo del zodiaco chino es: {{ zodiacSign }}</h3>
+    </div>
+  </div>
