@@ -101,9 +101,9 @@ constructor(private fb: FormBuilder) {
     const resistenciasGuardadas = localStorage.getItem('resistencias');
     if (resistenciasGuardadas) {
       this.resistencias = JSON.parse(resistenciasGuardadas);
-      console.log('Resistencias almacenadas:', this.resistencias);
+      console.log('resistencias almacenadas:', this.resistencias);
     } else {
-      console.log('No hay resistencias almacenadas.');}
+      console.log('no hay resistencias almacenadas.');}
   }
   getColorStyle(color: string) {
     switch (color) {

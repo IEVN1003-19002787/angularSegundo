@@ -96,7 +96,7 @@ imprimirEmpleados()
       } else {
         console.log('Empleado no encontrado para modificar.');}
     } else {
-      console.log('No hay empleados registrados.');
+      console.log('no hay empleados registrados.');
     }
   }
 calcularPago(horas: number): { pago: number, horasExtras: number, subtotal: number } {
