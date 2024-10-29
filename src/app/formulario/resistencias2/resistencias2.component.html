@@ -1,0 +1,83 @@
+<div class="max-w-xl mx-auto p-6 bg-blue-100 shadow-md rounded-lg">
+  <h2 class="text-2xl font-semibold mb-6 text-center">Calculo de Resistencia</h2>
+
+  <form [formGroup]="form" (ngSubmit)="calculate()" class="space-y-4">
+    <div>
+      <label for="color1" class="block text-sm font-medium text-gray-700 ">Color 1</label>
+      <select id="color1" formControlName="color1" class="hover:scale-105 mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="color2" class="block text-sm font-medium text-gray-700">Color 2</label>
+      <select id="color2" formControlName="color2" class="hover:scale-105 mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="color3" class="block text-sm font-medium text-gray-700">Color 3</label>
+      <select id="color3" formControlName="color3" class="hover:scale-105 mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+      </select>
+    </div>
+    <div class="Tolerancia">
+      <label>Tolerancia</label>
+      <br>
+      <input type="radio" formControlName="tolerance" [value]="5"> Oro 5% 
+      <input type="radio" formControlName="tolerance" [value]="10"> Plata 10%
+    </div>
+    <br>
+    <div class="flex space-x-4">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 hover:scale-105">Calcular y Registrar</button>
+      <button type="button" (click)="guardarResistencia()" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 hover:scale-105">Imprimir Resistencia</button>
+      <!-- <button type="button" (click)="mostrarResistencias()" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 hover:scale-105">Mostrar Resistencias</button> -->
+    </div>
+    <br>
+  </form>
+  <div *ngIf="showResults" class="mt-6 p-4 bg-gray-100 rounded-lg shadow">
+    <h3 class="text-lg font-medium">Resultado</h3>
+    <td [ngStyle]="{'background-color': getColorStyle(form.get('color1')?.value)}">{{ form.get('color1')?.value }}</td>
+    <td [ngStyle]="{'background-color': getColorStyle(form.get('color2')?.value)}">{{ form.get('color2')?.value }}</td>
+    <td [ngStyle]="{'background-color': getColorStyle(form.get('color3')?.value)}">{{ form.get('color3')?.value }}</td>
+    <p>Tolerancia: {{ form.get('tolerance')?.value }}%</p>
+    <p>Valor Resistencia: {{ valorResis }}</p>
+    <p>Valor Máximo: {{ valorMax }}</p>
+    <p>Valor Mínimo: {{ valorMin }}</p>
+  </div>
+  <div *ngIf="resistencias.length > 0" class="mt-6">
+    <h3 class="text-lg font-medium mb-4">Resistencias Guardadas</h3>
+    <table class="min-w-full border-collapse bg-white shadow-lg">
+      <thead>
+        <tr class="bg-gray-200 text-center">
+          <th class="border border-gray-300 px-4 py-2">Color 1</th>
+          <th class="border border-gray-300 px-4 py-2">Color 2</th>
+          <th class="border border-gray-300 px-4 py-2">Color 3</th>
+          <th class="border border-gray-300 px-4 py-2">Tolerancia</th>
+          <th class="border border-gray-300 px-4 py-2">Valor</th>
+          <th class="border border-gray-300 px-4 py-2">Valor Máximo</th>
+          <th class="border border-gray-300 px-4 py-2">Valor Mínimo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resistencia of resistencias" class="text-center">
+          <td class="border border-gray-300">
+            <span [ngStyle]="{'background-color': getColorStyle(resistencia.bandas[0])}" 
+                  class="inline-block w-16 h-8">{{ form.get('color1')?.value }}</span>
+          </td>
+          <td class="border border-gray-300">
+            <span [ngStyle]="{'background-color': getColorStyle(resistencia.bandas[1])}" 
+                  class="inline-block w-16 h-8">{{ form.get('color2')?.value }}</span>
+          </td>
+          <td class="border border-gray-300">
+            <span [ngStyle]="{'background-color': getColorStyle(resistencia.bandas[2])}" 
+                  class="inline-block w-16 h-8">{{ form.get('color3')?.value }}</span>
+          </td>
+          <td class="border border-gray-300">{{ resistencia.tolerancia }}%</td>
+          <td class="border border-gray-300">{{ resistencia.valor }}</td>
+          <td class="border border-gray-300">{{ resistencia.valorMax }}</td>
+          <td class="border border-gray-300">{{ resistencia.valorMin }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -12,7 +12,6 @@ interface Usuario{
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './ejemplo1.component.html',
-  styleUrl: './ejemplo1.component.css'
 })
 export default class Ejemplo1Component implements OnInit{
 
@@ -48,7 +47,7 @@ export default class Ejemplo1Component implements OnInit{
 
     let personaJSON=JSON.stringify(this.persona);
     localStorage.setItem('persona', personaJSON);
-    //console.log(this.persona)
+    console.log(this.persona)
 
   }
 

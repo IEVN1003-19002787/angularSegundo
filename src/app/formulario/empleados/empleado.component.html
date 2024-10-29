@@ -1,0 +1,96 @@
+<div class="max-w-6xl mx-auto p-4 bg-yellow-100 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-4 text-center">Registro de empleados</h2>
+  <div class="flex justify-between">
+      <form class="space-y-4 w-1/2">
+          <div>
+              <label class="block text-sm font-medium text-gray-700">Matricula</label>
+              <input [(ngModel)]="matricula" name="matricula" type="text"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Ingrese matricula" />
+          </div>
+          <div>
+              <label class="block text-sm font-medium text-gray-700">Nombre</label>
+              <input [(ngModel)]="nombre" name="nombre" type="text"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Ingrese nombre" />
+          </div>
+          <div>
+              <label class="block text-sm font-medium text-gray-700">Correo</label>
+              <input [(ngModel)]="correo" name="correo" type="email"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Ingrese correo" />
+          </div>
+          <div>
+              <label class="block text-sm font-medium text-gray-700">Edad</label>
+              <input [(ngModel)]="edad" name="edad" type="number"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Ingrese edad" />
+          </div>
+          <div>
+              <label class="block text-sm font-medium text-gray-700">Horas trabajadas</label>
+              <input [(ngModel)]="horasTrabajadas" name="horasTrabajadas" type="number"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Ingrese horas trabajadas" />
+          </div>
+          <div class="flex justify-center mt-6 space-x-2">
+              <button type="button" (click)="registrarEmpleado()"
+                  class="bg-green-500 text-white px-4 py-2 rounded-md shadow hover:scale-105">
+                  Registrar
+              </button>
+          </div>
+      </form>
+
+      <div class="w-1/2 ml-4">
+          <br>
+          <button type="button" (click)="mostrarEmpleadosTabla()"
+              class="bg-indigo-500 text-white px-4 py-4 rounded-md shadow justify-between hover:scale-105">
+              Imprimir
+          </button>
+          <br>
+          <br>
+          <h3 class="text-xl font-semibold mb-4 justify-center">Tabla de empleados registrados</h3>
+          <table class="min-w-full border-collapse bg-white shadow-lg">
+              <thead>
+                <tr class="bg-gray-200 text-center">
+                      <th class="border border-gray-300 px-4 py-2">Matricula</th>
+                      <th class="border border-gray-300 px-4 py-2">Nombre</th>
+                      <th class="border border-gray-300 px-4 py-2">Correo</th>
+                      <th class="border border-gray-300 px-4 py-2">Edad</th>
+                      <th class="border border-gray-300 px-4 py-2">Horas trabajadas</th>
+                      <th class="border border-gray-300 px-4 py-2">Horas x pagar</th>
+                      <th class="border border-gray-300 px-4 py-2">Horas extras</th>
+                      <th class="border border-gray-300 px-4 py-2">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let empleado of empleados" class="text-center">
+                      <td class="border border-gray-300">{{ empleado.matricula }}</td>
+                      <td class="border border-gray-300">{{ empleado.nombre }}</td>
+                      <td class="border border-gray-300">{{ empleado.correo }}</td>
+                      <td class="border border-gray-300">{{ empleado.edad }}</td>
+                      <td class="border border-gray-300">{{ empleado.horasTrabajadas }}</td>
+                      <td class="border border-gray-300">${{ empleado.pago }}</td>
+                      <td class="border border-gray-300">${{ empleado.horasExtras *140}}</td>
+                      <td class="border border-gray-300">${{ empleado.subtotal}}</td>
+                  </tr>
+              </tbody>
+          </table>
+          <div class="text-sm font-semibold" *ngIf="empleados.length > 0">
+              <strong>Total a pagar: ${{ totalPago }}</strong>
+          </div>
+          <br>
+          <div class="flex justify-center mt-6 space-x-2">
+              <button type="button" (click)="modificarEmpleado()"
+                  class="bg-yellow-500 text-white px-4 py-2 rounded-md shadow hover:scale-105">
+                  Modificar
+              </button>
+          </div>
+          <div class="flex justify-center mt-6 space-x-2">
+              <button type="button" (click)="eliminarEmpleado()"
+                  class="bg-red-500 text-white px-4 py-2 rounded-md shadow hover:scale-105">
+                  Eliminar
+              </button>
+          </div>
+      </div>
+  </div>
+</div>

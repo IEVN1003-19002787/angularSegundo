@@ -6,8 +6,8 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/features/auth.routes')
     },
     {
-    path: 'auth2',
-    loadChildren: () => import('./auth2/features/auth2.routes')
+    path: 'formulario',
+    loadChildren: () => import('./formulario/form.routes')
     }
     
 ];
